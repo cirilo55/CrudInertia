@@ -56,8 +56,10 @@
 
 <script setup>
 import axios from 'axios';
-import { reactive, watch, defineProps} from 'vue';
+import { reactive, watch, defineProps, defineEmits} from 'vue';
 import { router } from '@inertiajs/vue3';
+
+const emit = defineEmits(['closePopUp'])
 
 const props = defineProps({
     id: {
@@ -85,16 +87,21 @@ watch(() => props.id, async (newValue) => {
         await fetchTransportadora(newValue);
     } else {
         await fetchTransportadora(false);
+
     }
+
 });
 
 const submit = async () => {
     if (props.id) {
         await router.put(`/transportadora/${props.id}`, form); // Editar transportadora existente
+
     } else {
         await router.post('/transportadora', form); // Adicionar nova transportadora
 
+
     }
+    emit('closePopUp');
 };
 
 async function fetchTransportadora(id) {
@@ -155,6 +162,9 @@ function handleCEP() {
         searchAddress();
     }
 }
+
+
+
 
 </script>
 
