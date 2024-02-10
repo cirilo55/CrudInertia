@@ -44,7 +44,11 @@
                     <label for="data_analise_credito">Data de Análise de Crédito:</label>
                     <input type="date" v-model="form.data_analise_credito" id="data_analise_credito" required>
                 </div>
+            </div>
+            <div class="flex">
+                <div style="margin-left: auto;">
                 <button type="submit">Enviar</button>
+                </div>
             </div>
         </form>
     </div>
