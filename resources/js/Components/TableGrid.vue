@@ -1,7 +1,7 @@
 <template>
     <div class="table-grid max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                 <thead class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <tr>
                         <th scope="col" class="w-1/12 whitespace-nowrap">#</th>
@@ -18,7 +18,9 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in data" :key="index"
-                        class="bg-white border-b dark:bg-gray-600 dark:border-gray-700">
+                        class="bg-white border-b dark:bg-gray-600 dark:border-gray-700 hover:bg-blue-400 cursor-pointer"
+                        @dblclick="editTransportadora(item.id)"
+                        >
                         <td class="px-2 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ item.id }}</td>
                         <td class="px-2 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{ item.nome }}
                         </td>

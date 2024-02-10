@@ -54,6 +54,8 @@ export default {
 
         <TableGrid :data="transportadoras" @edit="openModal"/>
 
+        <Footer class="" />
+
         <FormModal :isOpen="isOpen" @close="closeModal">
             <template #content>
                 <div class="form-content">
@@ -62,9 +64,8 @@ export default {
                 </div>
             </template>
         </FormModal>
+
+
     </AuthenticatedLayout>
 </template>
-<style>
-    .logo-add{
-    }
-</style>
+
