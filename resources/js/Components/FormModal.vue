@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <div>Transportadora</div>
-                <button class="close-button" @click="close">Fechar</button>
+                <button class="close-button" @click="close"><closeIcon /></button>
                 </div>
                 <slot name="content"></slot>
             </div>
@@ -14,7 +14,12 @@
 </template>
 
 <script>
+import closeIcon from './icons/closeIcon.vue';
+
 export default {
+    components:{
+        closeIcon
+    },
     props: {
         isOpen: {
             type: Boolean,
@@ -48,6 +53,10 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-header{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
 }
 
 .modal-container {

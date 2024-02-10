@@ -34,10 +34,10 @@
                             item.data_analise_credito }}</td>
 
                         <td class="px-2 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                            <button class="bg-blue-300" @click="editTransportadora(item.id)">Edit</button>
+                            <button class="bg-blue-300" @click="editTransportadora(item.id)"><EditLogo /></button>
                         </td>
                         <td class="px-2 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                            <button class="bg-red-700" @click="deleteTransportadora(item.id)">Delete</button>
+                            <button @click="deleteTransportadora(item.id)"><DeleteLogo /></button>
                         </td>
                     </tr>
                 </tbody>
@@ -47,8 +47,12 @@
 </template>
 
 <script>
-
+import EditLogo from './icons/editLogo.vue';
+import DeleteLogo from './icons/deleteLogo.vue';
 export default {
+    components:{
+        EditLogo,DeleteLogo
+    },
     props: {
         data: {
             type: Array,
