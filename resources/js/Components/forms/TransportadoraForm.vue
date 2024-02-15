@@ -8,39 +8,38 @@
                     <input type="text" v-model="form.nome" id="nome" required>
 
                 </div>
-                <div v-if="!props.id" class="form-group mx-1">
+                <div v-if="!props.id" class="form-group">
                     <label for="cep">C.E.P</label>
                     <input type="text" v-model="form.cep" id="cep" required maxlength="9" @input="handleCEP">
                 </div>
             </div>
 
-
             <div class="flex">
-                <div class="form-group mx-1">
+                <div class="form-group ">
                     <label for="endereco">Endereço:</label>
                     <input type="text" v-model="form.endereco" id="endereco" required>
                 </div>
 
-                <div class="form-group mx-1">
+                <div class="form-group">
                     <label for="bairro">Bairro:</label>
                     <input type="text" v-model="form.bairro" id="bairro" required>
                 </div>
-                <div class="form-group mx-1">
+                <div class="form-group">
                     <label for="cidade">Cidade:</label>
                     <input type="text" v-model="form.cidade" id="cidade" required>
                 </div>
-                <div class="form-group mx-1">
+                <div class="form-group">
                     <label for="uf">UF:</label>
                     <input type="text" v-model="form.uf" id="uf" required>
                 </div>
             </div>
 
             <div class="flex">
-                <div class="form-group mx-1">
+                <div class="form-group">
                     <label for="limite_creditos">Limite de Créditos:</label>
                     <input type="number" v-model="form.limite_creditos" id="limite_creditos" required>
                 </div>
-                <div class="form-group mx-1">
+                <div class="form-group">
                     <label for="data_analise_credito">Data de Análise de Crédito:</label>
                     <input type="date" v-model="form.data_analise_credito" id="data_analise_credito" required>
                 </div>
@@ -58,6 +57,21 @@
 import axios from 'axios';
 import { reactive, watch, defineProps, defineEmits} from 'vue';
 import { router } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1500,
+  color: '#ffff',
+  background: '#1f2937',
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 const emit = defineEmits(['closePopUp'])
 
@@ -94,14 +108,23 @@ watch(() => props.id, async (newValue) => {
 });
 
 const submit = async () => {
+    let msg = '';
     if (props.id) {
         await router.put(`/transportadora/${props.id}`, form); // Editar transportadora existente
         await clearForm();
+        msg='Transportadora Atualizada com sucesso!';
     } else {
         await router.post('/transportadora', form); // Adicionar nova transportadora
         await clearForm();
+        msg='Transportadora Criada com sucesso!';
+
     }
     emit('closePopUp');
+
+    await Toast.fire({
+            icon: "success",
+            title: msg
+    });
 };
 
 async function fetchTransportadora(id) {

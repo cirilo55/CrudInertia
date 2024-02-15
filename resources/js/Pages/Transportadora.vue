@@ -1,3 +1,4 @@
+
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import TransportadoraForm from '@/Components/forms/TransportadoraForm.vue';

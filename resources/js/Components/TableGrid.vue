@@ -51,6 +51,23 @@
 <script>
 import EditLogo from './icons/editLogo.vue';
 import DeleteLogo from './icons/deleteLogo.vue';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1500,
+  color: '#ffff',
+  background: '#1f2937',
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
+
+
 export default {
     components:{
         EditLogo,DeleteLogo
@@ -74,7 +91,11 @@ export default {
                         if (index !== -1) {
                             this.data.splice(index, 1);
                         }
-                    })
+                        Toast.fire({
+                                icon: "success",
+                                title: 'Transportadora excluida com sucesso.'
+                        });
+            })
                     .catch(error => {
                         console.error('Erro ao excluir a transportadora:', error);
                     });
