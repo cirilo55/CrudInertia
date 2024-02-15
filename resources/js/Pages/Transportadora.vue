@@ -20,7 +20,6 @@ export default {
         return {
             isOpen: false,
             selectedTransportadora: null, // Guarda a transportadora selecionada para edição
-            selectedTransportadoraId: null // Guarda o ID da transportadora selecionada
         };
     },
     methods: {

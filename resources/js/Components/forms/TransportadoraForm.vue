@@ -83,6 +83,7 @@ const form = reactive({
 
 //Ficar Olhando Id e adiciona no popUp;
 watch(() => props.id, async (newValue) => {
+
     if (newValue) {
         await fetchTransportadora(newValue);
     } else {
@@ -95,11 +96,10 @@ watch(() => props.id, async (newValue) => {
 const submit = async () => {
     if (props.id) {
         await router.put(`/transportadora/${props.id}`, form); // Editar transportadora existente
-
+        await clearForm();
     } else {
         await router.post('/transportadora', form); // Adicionar nova transportadora
-
-
+        await clearForm();
     }
     emit('closePopUp');
 };
@@ -121,14 +121,7 @@ async function fetchTransportadora(id) {
             console.error('Erro ao buscar detalhes da transportadora:', error);
         }
     } else {
-        form.nome = '';
-        form.endereco = '';
-        form.bairro = '';
-        form.cidade = '';;
-        form.uf = '';
-        form.limite_creditos = '';
-        form.data_analise_credito = '';
-        form.cep = '';
+        clearForm();
     }
 }
 
@@ -161,6 +154,17 @@ function handleCEP() {
     if (form.cep.length === 9) {
         searchAddress();
     }
+}
+function clearForm()
+{
+    form.nome = '';
+        form.endereco = '';
+        form.bairro = '';
+        form.cidade = '';;
+        form.uf = '';
+        form.limite_creditos = '';
+        form.data_analise_credito = '';
+        form.cep = '';
 }
 
 
