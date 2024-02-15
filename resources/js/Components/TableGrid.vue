@@ -69,7 +69,11 @@ export default {
             if (confirm('Tem certeza que deseja excluir esta transportadora?')) {
                 axios.delete(`/transportadora/${id}`)
                     .then(response => {
-
+                        // Remove a linha
+                        const index = this.data.findIndex(item => item.id === id);
+                        if (index !== -1) {
+                            this.data.splice(index, 1);
+                        }
                     })
                     .catch(error => {
                         console.error('Erro ao excluir a transportadora:', error);
